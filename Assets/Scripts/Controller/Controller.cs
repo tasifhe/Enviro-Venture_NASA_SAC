@@ -9,6 +9,8 @@ public class Controller : MonoBehaviour
 
     public InteractionController InteractionController;
     public NotificationController NotificationController;
+    public LabController LabController;
+    public SampleController SampleController;
     private void Awake()
     {
         if (instance == null)

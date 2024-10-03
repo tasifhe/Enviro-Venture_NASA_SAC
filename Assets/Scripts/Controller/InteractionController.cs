@@ -16,8 +16,6 @@ public class InteractionController : MonoBehaviour
     {
         if (cic.currentInteractable)
         {
-            Debug.Log("Can interact with " + cic.currentInteractable.name);
-
             if (!interactButton.IsActive())
             {
                 interactButton.GetComponentInChildren<TMP_Text>().text =
@@ -26,21 +24,7 @@ public class InteractionController : MonoBehaviour
                 
                 interactButton.onClick.AddListener(delegate
                 {
-                    // interactButton.interactable = false;
-                    interactButton.GetComponentInChildren<TMP_Text>().text =
-                        DetermineInteractingText(cic.currentInteractable.type);
-
-                    cic.currentInteractable.isInteracting = true;
-                    interactingIndicator.DOFillAmount(1, 2f).SetEase(Ease.InOutQuad).OnComplete(() =>
-                    {
-                        cic.currentInteractable.isInteracting = false;
-                        interactButton.GetComponentInChildren<TMP_Text>().text =
-                            DetermineButtonText(cic.currentInteractable.type);
-                        interactingIndicator.fillAmount = 0;
-                        cic.currentInteractable.Interact();
-
-                    });
-                    
+                    cic.currentInteractable.Interact();
                 });
             }
          
@@ -55,12 +39,27 @@ public class InteractionController : MonoBehaviour
         }
     }
 
+    public void StartInteracting(Action ac)
+    {
+        interactButton.GetComponentInChildren<TMP_Text>().text =
+            DetermineInteractingText(cic.currentInteractable.type);
+
+        interactingIndicator.DOFillAmount(1, 2f).SetEase(Ease.InOutQuad).OnComplete(() =>
+        {
+            cic.currentInteractable.isInteracting = false;
+            interactButton.GetComponentInChildren<TMP_Text>().text =
+                DetermineButtonText(cic.currentInteractable.type);
+            interactingIndicator.fillAmount = 0;
+            ac?.Invoke();
+        });
+    }
+
     string DetermineButtonText(InteractableType type)
     {
         switch (type)
         {
             case InteractableType.Laboratory:
-                return "EXAMINE";
+                return $"EXAMINE-{Controller.instance.LabController.SampleName()}";
                 break;
             case InteractableType.FloodWater:
             case InteractableType.StagnantWater:
