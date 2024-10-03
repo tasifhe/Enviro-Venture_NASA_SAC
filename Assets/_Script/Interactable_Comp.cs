@@ -5,15 +5,16 @@ using UnityEngine;
 public class Interactable_Comp : MonoBehaviour
 {
 
+    public virtual void Interact()
+    {
+        isInteracting = true;
+        Debug.Log("Interact on base!");
+    }
 
 
     public bool isInteracting;
-
-
-    private void Update()
-    {
-        
-    }
+    public InteractableType type;
+    
 
     public void OnInteract()
     {
@@ -30,9 +31,18 @@ public class Interactable_Comp : MonoBehaviour
         }
     }
    
-    void SetIsInteractingStateFalse()
+    public void SetIsInteractingStateFalse()
     {
         isInteracting = false;
     }
 
+}
+
+public enum InteractableType
+{
+    FloodWater,
+    StagnantWater,
+    PaddyField,
+    Laboratory,
+    
 }

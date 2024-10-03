@@ -21,7 +21,7 @@ namespace GoThrough.Samples
 			this.rigidbody.freezeRotation = true;
 			this.rigidbody.useGravity = false;
 
-			Cursor.lockState = CursorLockMode.Locked;
+			 // Cursor.lockState = CursorLockMode.Locked;
 		}
 
 		private void Update()
