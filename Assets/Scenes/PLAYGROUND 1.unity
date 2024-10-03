@@ -7182,8 +7182,8 @@ MonoBehaviour:
   type: 3
   sampleID: 1
   examinationSummary: {fileID: 1613854646}
-  reportSummary: {fileID: 1671616611}
-  standardValue: {fileID: 354673182}
+  reportSummary: {fileID: 354673182}
+  standardValue: {fileID: 1671616611}
 --- !u!1 &1935383424
 GameObject:
   m_ObjectHideFlags: 0
