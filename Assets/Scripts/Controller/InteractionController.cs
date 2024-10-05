@@ -10,6 +10,7 @@ public class InteractionController : MonoBehaviour
 {
     public CharacterInteractionCore cic;
     public Button interactButton;
+    public GameObject indicatorObject;
     public Image interactingIndicator;
     
     private void Update()
@@ -44,9 +45,11 @@ public class InteractionController : MonoBehaviour
         interactButton.GetComponentInChildren<TMP_Text>().text =
             DetermineInteractingText(cic.currentInteractable.type);
 
+        indicatorObject.SetActive(true);
         interactingIndicator.DOFillAmount(1, 2f).SetEase(Ease.InOutQuad).OnComplete(() =>
         {
             cic.currentInteractable.isInteracting = false;
+            indicatorObject.SetActive(false);
             interactButton.GetComponentInChildren<TMP_Text>().text =
                 DetermineButtonText(cic.currentInteractable.type);
             interactingIndicator.fillAmount = 0;

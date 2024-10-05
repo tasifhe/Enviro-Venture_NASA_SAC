@@ -30,13 +30,13 @@ public class LabController : MonoBehaviour
 
     }
 
-    public string ExamineSample()
+    public WaterQualityReport ExamineSample()
     {
         int index = samples.FindIndex(_sample => _sample.examined == false);
 
         if (index != -1)
         {
-            Controller.instance.NotificationController.ShowNotification($"Examined!!",$"You have just examined the {SampleName()}",3f);
+            // Controller.instance.NotificationController.ShowNotification($"Examined!!",$"You have just examined the {SampleName()}",3f);
             samples[index].examined = true;
 
             if (samples[index].sampleType == InteractableType.FloodWater ||
@@ -46,14 +46,14 @@ public class LabController : MonoBehaviour
             }
             else
             {
-                return "";
+                return new WaterQualityReport();
             }
             
         }
         else
         {
             Debug.LogError("No Sample");
-            return "";
+            return new WaterQualityReport();
         }
     }
 
